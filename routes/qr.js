@@ -27,10 +27,11 @@ const upload = multer({
     }
 });
 
-
-router.get('/', (req, res) => {
+router.get('/create_qr', (req, res) => {
     res.render('QR/create_qr');
 });
+
+
 
 router.post('/generate_qr', upload.single('icon_img'), async (req, res) => {
     try {
@@ -118,6 +119,25 @@ router.get('/index', async (req, res) => {
     }
 });
 
+router.post('/delete/:id', async (req, res) => {
+    console.log('Richiesta DELETE ricevuta');
+    console.log('ID ricevuto:', req.params.id);
+    try {
+        const qrId = req.params.id;
+        const deletedQr = await QrData.findByIdAndDelete(qrId);
+        
+        if (!deletedQr) {
+            console.log('QR non trovato nel database');
+            return res.redirect('/QR/history?error=QR code non trovato');
+        }
+
+        console.log('QR eliminato con successo');
+        res.redirect('/QR/history?success=QR code eliminato con successo');
+    } catch (err) {
+        console.error('Errore durante l\'eliminazione:', err);
+        res.redirect('/QR/history?error=Errore durante l\'eliminazione del QR code');
+    }
+});
 
 
 module.exports = router;

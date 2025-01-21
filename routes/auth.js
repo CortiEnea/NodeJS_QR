@@ -20,7 +20,7 @@ function validaDati(req, res, next) {
 }
 
 // Route per la login
-router.get('/', (req, res) => {
+router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
@@ -69,7 +69,7 @@ router.post('/signup', validaDati, async (req, res) => {
     });
 
     await newUser.save();
-    res.send("Utente creato con successo. Ora puoi fare login.");
+    res.render('QR/create_qr')
   } catch (error) {
     console.error("Errore durante la creazione dell'utente:", error);
     res.status(500).send("Errore interno del server.");
