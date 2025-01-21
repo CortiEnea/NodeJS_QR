@@ -1,7 +1,13 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./views/**/*.hbs"],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-} 
+    content: ["./views/**/*.{html,js,hbs}"],
+    theme: {
+      extend: {
+        colors: {
+          primary: '#FFB800',
+          'primary-hover': '#E5A600'
+        }
+      },
+    },
+    plugins: [],
+  }

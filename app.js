@@ -15,6 +15,9 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'static')));
+app.use('/css', express.static('public/css'))
+app.use(express.static('public'))
+
 
 app.use('/', router_auth );
 app.use('/QR', router_QR);
